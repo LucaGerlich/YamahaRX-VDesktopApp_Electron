@@ -1,7 +1,8 @@
 //The Yamaha Api was done by PSeitz on Github (https://github.com/PSeitz/yamaha-nodejs)
 
-const electron = require('electron')
-const Yamaha = require("./YamahaApi/yamaha.js.js");
+const electron = require("electron");
+var Promise = require("bluebird");
+const Yamaha = require("./yamaha.js");
 var yamaha = new Yamaha();
 
 //Buttons 
@@ -43,4 +44,9 @@ function mutedevice() {
 function unmutedevice() {
     yamaha.muteOff()
     console.log("Device is Unmuted")
+}
+
+function changesourcetoanalog() {
+    yamaha.setInputTo("AUDIO")
+    console.log("Source is changed to Audio")
 }

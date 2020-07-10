@@ -354,42 +354,42 @@ Yamaha.prototype.getBasicInfo = function(zone) {
 
 function enrichBasicStatus(basicStatus, zone) {
     zone = getZone(zone);
-    debug("getBasicInfo", zone, JSON.stringify(basicStatus, null, 2));
+    debug("getBasicInfo",zone,JSON.stringify(basicStatus, null, 2));
 
-    basicStatus.getVolume = function () {
+    basicStatus.getVolume = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Volume[0].Lvl[0].Val[0]);
         } catch (e) {
             return -999;
         }
     };
-
-    basicStatus.getZone = function () {
+    
+    basicStatus.getZone = function() {
         return zone;
     }
 
-    basicStatus.isMuted = function () {
+    basicStatus.isMuted = function() {
         return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Volume[0].Mute[0] !== "Off";
     };
 
-    basicStatus.isOn = function () {
+    basicStatus.isOn = function() {
         return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Power_Control[0].Power[0] === "On";
     };
 
-    basicStatus.isOff = function () {
+    basicStatus.isOff = function() {
         return !basicStatus.isOn();
     };
 
-    basicStatus.getCurrentInput = function () {
+    basicStatus.getCurrentInput = function() {
         return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Input[0].Input_Sel[0];
     };
 
-    basicStatus.isPartyModeEnabled = function () {
+    basicStatus.isPartyModeEnabled = function() {
         return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Party_Info[0] === "On";
     };
 
     //the following properties are only available in Main Zone
-    basicStatus.isPureDirectEnabled = function () {
+    basicStatus.isPureDirectEnabled = function() {
         try {
             return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Pure_Direct[0].Mode[0] === "On";
         } catch (e) {
@@ -397,7 +397,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.getBass = function () {
+    basicStatus.getBass = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Tone[0].Bass[0].Val[0]);
         } catch (e) {
@@ -405,7 +405,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.getTreble = function () {
+    basicStatus.getTreble = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Tone[0].Treble[0].Val[0]);
         } catch (e) {
@@ -413,7 +413,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.getSubwooferTrim = function () {
+    basicStatus.getSubwooferTrim = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Volume[0].Subwoofer_Trim[0].Val[0]);
         } catch (e) {
@@ -421,7 +421,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.getDialogueLift = function () {
+    basicStatus.getDialogueLift = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Dialogue_Adjust[0].Dialogue_Lift[0]);
         } catch (e) {
@@ -429,7 +429,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.getDialogueLevel = function () {
+    basicStatus.getDialogueLevel = function() {
         try {
             return parseInt(basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Dialogue_Adjust[0].Dialogue_Lvl[0]);
         } catch (e) {
@@ -437,7 +437,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.isYPAOVolumeEnabled = function () {
+    basicStatus.isYPAOVolumeEnabled = function() {
         //values 'Off' or 'Auto'
         try {
             return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].YPAO_Volume[0] !== 'Off';
@@ -446,7 +446,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.isExtraBassEnabled = function () {
+    basicStatus.isExtraBassEnabled = function() {
         //values 'Off' or 'Auto'
         try {
             return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Extra_Bass[0] !== 'Off';
@@ -455,7 +455,7 @@ function enrichBasicStatus(basicStatus, zone) {
         }
     };
 
-    basicStatus.isAdaptiveDRCEnabled = function () {
+    basicStatus.isAdaptiveDRCEnabled = function() {
         //values 'Off' or 'Auto'
         try {
             return basicStatus.YAMAHA_AV[zone][0].Basic_Status[0].Sound_Video[0].Adaptive_DRC[0] !== 'Off';

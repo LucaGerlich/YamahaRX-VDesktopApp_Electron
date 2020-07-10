@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
+    "electron-builder": "^22.7.0",
     "electron-squirrel-startup": "^1.0.0",
     "yamaha-nodejs": "^0.9.6"
   },

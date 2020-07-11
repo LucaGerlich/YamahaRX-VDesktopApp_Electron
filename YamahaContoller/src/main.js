@@ -25,6 +25,7 @@ function checkstate() {
             document.getElementById("isOn").innerHTML = "Off";
         }
     });
+
     yamaha.getBasicInfo().done(function(basicInfo){
         basicInfo.isMuted();
         if (basicInfo.isMuted() == true) {
@@ -83,7 +84,7 @@ function mutedevice() {
 function unmutedevice() {
     yamaha.muteOff();
     console.log("Device is Unmuted");
-    document.getElementById("status").innerHTML = "Device is now unuted";
+    document.getElementById("status").innerHTML = "Device is now unmuted";
 }
 
 function changesourcetoanalog() {

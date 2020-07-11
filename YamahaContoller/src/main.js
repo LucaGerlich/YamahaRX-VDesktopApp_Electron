@@ -12,6 +12,12 @@ var yamaha = new Yamaha();
 
 yamaha.isOn().done(function (resultOn) {
     console.log("Reciver is ON: " + resultOn);
+    if (resultOn == true) {
+        document.getElementById("isOn").innerHTML = "On";
+    } else {
+        document.getElementById("isOn").innerHTML = "Off";
+    }
+
 });
 
 function turnedOn(){

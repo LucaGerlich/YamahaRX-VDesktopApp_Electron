@@ -1,53 +1,41 @@
 //The Yamaha Api was done by PSeitz on Github (https://github.com/PSeitz/yamaha-nodejs)
 const Yamaha = require("./yamahaapi/yamaha.js");
-var yamaha = new Yamaha();
+var yamaha = new Yamaha("192.168.178.32");
 
 checkstate();
 checkvol();
-
-yamaha.getBasicInfo().done(function(basicInfo){
-    basicInfo.getVolume();
-    basicInfo.isMuted();
-    basicInfo.isOn();
-    basicInfo.getCurrentInput();
-    basicInfo.getBass();
-    basicInfo.getTreble();
-    basicInfo.getZone();
-    console.log(" Vol: ", basicInfo.getVolume(), ", Muted: ", basicInfo.isMuted(),", isOn: ", basicInfo.isOn(), ", Input: ", basicInfo.getCurrentInput(),", Bass: ", basicInfo.getBass(),", Treble: ", basicInfo.getTreble(),", Zone: ", basicInfo.getZone());
-})
+checkinput();
 
 function checkstate() {
     yamaha.isOn().done(function (resultOn) {
-        //console.log("Reciver is ON: " + resultOn);
         if (resultOn == true) {
             document.getElementById("isOn").innerHTML = "On";
         } else {
             document.getElementById("isOn").innerHTML = "Off";
         }
     });
-
-    yamaha.getBasicInfo().done(function(basicInfo){
-        basicInfo.isMuted();
-        if (basicInfo.isMuted() == true) {
-            //document.getElementById("currentvol").innerHTML = "Your device is muted!";
-            //alert("Your Device is muted")
-        }
-    })
-    setTimeout(checkstate, 1000);
+    setTimeout(checkstate, 100);
 }
 
 function checkvol() {
     yamaha.getBasicInfo().done(function(basicInfo){
-    basicInfo.getVolume();
-    document.getElementById("currentvol").innerHTML = basicInfo.getVolume();
+        basicInfo.getVolume();
+        document.getElementById("currentvol").innerHTML = basicInfo.getVolume();
+        basicInfo.getBass();
+        document.getElementById("bass").innerHTML = basicInfo.getBass();
+        basicInfo.getTreble();
+        document.getElementById("treble").innerHTML = basicInfo.getTreble();
+    });
     setTimeout(checkvol, 100);
-    })
 }
 
-/*function clearelementID(){
-    document.getElementById("status").innerHTML = " "();
-    setTimeout(clearelementID, 1000);
-}*/
+function checkinput(){
+    yamaha.getBasicInfo().done(function(basicInfo){
+        basicInfo.getCurrentInput();
+        document.getElementById("currentinput").innerHTML = basicInfo.getCurrentInput();
+    });
+    setTimeout(checkinput, 100);
+}
 
 function turnedOn(){
     yamaha.powerOn();
@@ -91,5 +79,12 @@ function changesourcetoanalog() {
     yamaha.setInputTo("AUDIO");
     console.log("Source is changed to Audio");
     document.getElementById("status").innerHTML = "Source was changed to Audio/Analog";
-    clearelementID()
+    clearelementID();
+}
+
+function changesourcetonet() {
+    yamaha.setInputTo("NET");
+    console.log("Source is changed to Spotify");
+    document.getElementById("status").innerHTML = "Source was changed to NET/Spotify";
+    clearelementID();
 }

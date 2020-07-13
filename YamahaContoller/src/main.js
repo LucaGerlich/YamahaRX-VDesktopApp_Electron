@@ -5,6 +5,7 @@ var yamaha = new Yamaha("192.168.178.32");
 checkstate();
 checkvol();
 checkinput();
+checkbnt()
 
 function checkstate() {
     yamaha.isOn().done(function (resultOn) {
@@ -14,19 +15,25 @@ function checkstate() {
             document.getElementById("isOn").innerHTML = "Off";
         }
     });
-    setTimeout(checkstate, 100);
+    setTimeout(checkstate, 1000);
 }
 
 function checkvol() {
     yamaha.getBasicInfo().done(function(basicInfo){
         basicInfo.getVolume();
         document.getElementById("currentvol").innerHTML = basicInfo.getVolume();
+    });
+    setTimeout(checkvol, 100);
+}
+
+function checkbnt(){
+    yamaha.getBasicInfo().done(function(basicInfo){
         basicInfo.getBass();
         document.getElementById("bass").innerHTML = basicInfo.getBass();
         basicInfo.getTreble();
         document.getElementById("treble").innerHTML = basicInfo.getTreble();
     });
-    setTimeout(checkvol, 100);
+    setTimeout(checkbnt, 1000);
 }
 
 function checkinput(){
@@ -34,7 +41,7 @@ function checkinput(){
         basicInfo.getCurrentInput();
         document.getElementById("currentinput").innerHTML = basicInfo.getCurrentInput();
     });
-    setTimeout(checkinput, 100);
+    setTimeout(checkinput, 1000);
 }
 
 function turnedOn(){
@@ -63,6 +70,15 @@ function volumedown(){
     document.getElementById("status").innerHTML = "Volume has been turned down by 0.5 DB";
 }
 
+function setvolume() {
+    var volume = document.querySelector("#setvolume").value;
+    if (volume > -600 && volume < -300) {
+        yamaha.setVolumeTo(volume);
+        console.log(volume);
+      }
+    
+}
+
 function mutedevice() {
     yamaha.muteOn();
     console.log("Device is Muted");
@@ -87,4 +103,16 @@ function changesourcetonet() {
     console.log("Source is changed to Spotify");
     document.getElementById("status").innerHTML = "Source was changed to NET/Spotify";
     clearelementID();
+}
+
+function setbass() {
+    var bass = document.querySelector("#setbass").value;
+    console.log(bass);
+    yamaha.setBassTo(bass);
+}
+
+function settreble() {
+    var treble = document.querySelector("#settreble").value;
+    console.log(treble);
+    yamaha.setTrebleTo(treble);
 }

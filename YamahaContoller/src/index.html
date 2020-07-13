@@ -9,21 +9,30 @@
     
     <h1>Yamaha Controller</h1>
     <p>Device is currently <q id="isOn"></q></p>
-    <p>Current volume is <q id="currentvol"></q></p>
+    <p>Current volume is <q id="currentvol"></q> dB</p>
     <p>Current input is <q id="currentinput"></q></p>
-    <p>Your Receiver says: <q id="status"></q></p>
     <p>Bass: <q id="bass"></q></p>
     <p>Treble: <q id="treble"></q></p>
+    <p>Your Receiver says: <q id="status"></q></p>
 
     <button id="turnOn" onclick="turnedOn()">Turn On</button>
     <button id="turnOff" onclick="turnedOff()">Turn Off</button>
+    </br>
+    Set Volume (-600..-300): <input type="text" name="setvolume" id="setvolume"><button id="setvolumebtn" onclick="setvolume()">set</button>
+    </br>
     <button id="volumeup" onclick="volumeup()">Volume Up</button>
     <button id="volumedown" onclick="volumedown()">Volume Down</button>
+    </br>
     <button id="mute" onclick="mutedevice()">Mute On</button>
     <button id="unmute" onclick="unmutedevice()">Mute Off</button>
+    </br>
     <button id="changesource2analog" onclick="changesourcetoanalog()">Change Source to Analog</button>
     <button id="changesource2net" onclick="changesourcetonet()">Change Source to Spotify</button>
-        
+    </br>
+    Set Bass value (-60..60): <input type="text" name="setbass" id="setbass"><button id="setbassbtn" onclick="setbass()">set</button>
+    </br>
+    Set Treble value (-60..60): <input type="text" name="settreble" id="settreble"><button id="setbassbtn" onclick="settreble()">set</button>
+
     <script src="main.js"></script>
   </body>
 </html>

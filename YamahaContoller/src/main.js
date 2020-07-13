@@ -72,11 +72,10 @@ function volumedown(){
 
 function setvolume() {
     var volume = document.querySelector("#setvolume").value;
-    if (volume > -600 && volume < -300) {
+    if (volume >= -600 && volume <= -300) {
         yamaha.setVolumeTo(volume);
         console.log(volume);
       }
-    
 }
 
 function mutedevice() {

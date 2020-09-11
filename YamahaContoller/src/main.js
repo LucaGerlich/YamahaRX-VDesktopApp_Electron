@@ -61,7 +61,7 @@ function turnedOff(){
 function volumeup(){
     yamaha.volumeUp(5);
     console.log("The Volume has been turned up");
-    document.getElementById("status").innerHTML = "Volume has been turned up by 0.5 DB";
+    document.getElementById("status").innerHTML = "Volume has been turned up by 0.5 DB";  
 }
 
 function volumedown(){
@@ -71,47 +71,87 @@ function volumedown(){
 }
 
 function setvolume() {
-    var volume = document.querySelector("#setvolume").value;
-    if (volume >= -600 && volume <= -300) {
-        yamaha.setVolumeTo(volume);
-        console.log(volume);
-      }
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            var volume = document.querySelector("#setvolume").value;
+            if (volume >= -600 && volume <= -300) {
+                yamaha.setVolumeTo(volume);
+                console.log(volume);
+            }
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }
 
 function mutedevice() {
-    yamaha.muteOn();
-    console.log("Device is Muted");
-    document.getElementById("status").innerHTML = "Device is now muted";
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            yamaha.muteOn();
+            console.log("Device is Muted");
+            document.getElementById("status").innerHTML = "Device is now muted";
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });    
 }
 
 function unmutedevice() {
-    yamaha.muteOff();
-    console.log("Device is Unmuted");
-    document.getElementById("status").innerHTML = "Device is now unmuted";
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            yamaha.muteOff();
+            console.log("Device is Unmuted");
+            document.getElementById("status").innerHTML = "Device is now unmuted";
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }
 
 function changesourcetoanalog() {
-    yamaha.setInputTo("AUDIO");
-    console.log("Source is changed to Audio");
-    document.getElementById("status").innerHTML = "Source was changed to Audio/Analog";
-    clearelementID();
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            yamaha.setInputTo("AUDIO");
+            console.log("Source is changed to Audio");
+            document.getElementById("status").innerHTML = "Source was changed to Audio/Analog";
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }
 
 function changesourcetonet() {
-    yamaha.setInputTo("NET");
-    console.log("Source is changed to Spotify");
-    document.getElementById("status").innerHTML = "Source was changed to NET/Spotify";
-    clearelementID();
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            yamaha.setInputTo("NET");
+            console.log("Source is changed to Spotify");
+            document.getElementById("status").innerHTML = "Source was changed to NET/Spotify";
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }
 
 function setbass() {
-    var bass = document.querySelector("#setbass").value;
-    console.log(bass);
-    yamaha.setBassTo(bass);
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            var bass = document.querySelector("#setbass").value;
+            console.log(bass);
+            yamaha.setBassTo(bass);
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }
 
 function settreble() {
-    var treble = document.querySelector("#settreble").value;
-    console.log(treble);
-    yamaha.setTrebleTo(treble);
+    yamaha.isOn().done(function (resultOn) {
+        if (resultOn == true) {
+            var treble = document.querySelector("#settreble").value;
+            console.log(treble);
+            yamaha.setTrebleTo(treble);
+        } else {
+            document.getElementById("status").innerHTML = "Your device is off";
+        }
+    });
 }

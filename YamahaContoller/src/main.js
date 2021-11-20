@@ -18,6 +18,8 @@ function checkstate() {
     setTimeout(checkstate, 1000);
 }
 
+
+
 function checkvol() {
     yamaha.getBasicInfo().done(function(basicInfo){
         basicInfo.getVolume();

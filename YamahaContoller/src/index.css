@@ -3,4 +3,18 @@ body {
   margin: auto;
   max-width: 38rem;
   padding: 2rem;
+  padding-top: 0%;
+  margin-top: 5%;
+}
+
+h1{
+  font-size: 50px;
+  margin: 0px 0px 10px 0px;
+}
+
+button{
+  padding: 5px 5px 5px 5px;
+  margin: 3px 3px 3px 3px;
+  color: black;
+  font-size: 15px;
 }
